@@ -1,32 +1,38 @@
-# React + TypeScript + Vite
+# SeatFlow Web
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+React + Vite + TypeScript + styled-components. Это демонстрационный фронтенд учебного проекта SeatFlow.
 
-Currently, two official plugins are available:
+## Запуск
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+Из корня репозитория:
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the Oxlint configuration
-
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```powershell
+pnpm install
+pnpm dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Фронтенд: http://localhost:5173, API: http://localhost:3000.
+
+## Первое задание
+
+В файле `src/features/health/api/health.api.ts` реализуй:
+
+- `getApiHealth()` → `GET /api/v1/health`
+- `getDatabaseHealth()` → `GET /api/v1/health/db`
+
+Для HTTP-запросов используй `getJson<T>()` из `src/shared/api/http.ts`.
+Верни типизированные результаты, не глуши ошибки. После реализации нажми **Проверить соединение** в блоке лаборатории.
+
+Данные афиши и схема зала пока демонстрационные и не связаны с Backend.
+Для переопределения адреса API скопируй `.env.example` в `.env` и укажи `VITE_API_BASE_URL`. Не клади в Vite env секреты.
+
+## Структура
+
+- `app/` — глобальные стили и тема.
+- `pages/` — композиция экранов.
+- `widgets/` — отдельные блоки UI.
+- `features/health/` — типы ответов и клиент для health API, состояние проверки.
+- `shared/api/` — базовый HTTP-клиент.
+- `shared/ui/` — общие styled-components.
+
+Здесь нет реального бронирования и реальных платежей — это будущие этапы обучения.

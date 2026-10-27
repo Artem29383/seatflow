@@ -1,0 +1,16 @@
+export const theme = {
+  background: '#0b101a',
+  surface: '#141c2a',
+  surfaceRaised: '#1a2536',
+  surfaceAlt: '#101723',
+  border: '#2a3445',
+  text: '#f3f4f8',
+  muted: '#9aa6ba',
+  subtle: '#64748b',
+  accent: '#b4a3ff',
+  accentDark: '#7866d8',
+  mint: '#85e4c5',
+  peach: '#ffc9a9',
+  error: '#ff949a',
+  maxWidth: '1180px',
+} as const;
