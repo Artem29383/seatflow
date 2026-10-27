@@ -14,6 +14,7 @@ export class DatabaseService  implements OnModuleDestroy {
             password: this.config.getOrThrow<string>('POSTGRES_PASSWORD'),
             database: this.config.getOrThrow<string>('POSTGRES_DB'),
             max: 5,
+            connectionTimeoutMillis: 2000,
         });
     }
 
