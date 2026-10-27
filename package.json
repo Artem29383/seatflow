@@ -1,0 +1,9 @@
+{
+  "name": "seatflow",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@10.21.0",
+  "scripts": {
+    "dev": "pnpm -r --parallel run dev"
+  }
+}
