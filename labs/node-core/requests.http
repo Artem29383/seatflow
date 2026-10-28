@@ -1,0 +1,31 @@
+### 1. Обычный JSON — ожидаем 200
+POST http://localhost:3001/echo
+Content-Type: application/json
+
+{
+  "name": "Artem"
+}
+
+### 2. Некорректный JSON — ожидаем 400
+POST http://localhost:3001/echo
+Content-Type: application/json
+
+{"name":
+
+### 3. Пустое тело — ожидаем 400
+POST http://localhost:3001/echo
+Content-Type: application/json
+Content-Length: 0
+
+
+### 4. Превышение лимита 1 МиБ — ожидаем 413
+POST http://localhost:3001/echo
+Content-Type: application/json
+
+< ./oversize.json
+
+### 5. Ровно 1 МиБ — ожидаем 200
+POST http://localhost:3001/echo
+Content-Type: application/json
+
+< ./exact-limit.json
