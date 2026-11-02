@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import {BadRequestException, Injectable} from '@nestjs/common';
 
 interface Item {
     id: string;
@@ -8,13 +8,18 @@ interface Item {
 }
 
 export interface Events {
-    items: Item[],
-    total: number
+    items: Item[];
+    total: number;
+    page: number;
+    totalPages: number;
+    limit: number;
 }
 
 @Injectable()
 export class EventsService {
-    items = [
+    maxLimit = 50;
+
+    private readonly items: Item[] = [
         {
             id: '1',
             title: 'Неоновый ритм',
@@ -24,21 +29,38 @@ export class EventsService {
         {
             id: '2',
             title: 'Желтый лист',
-            category: 'Концерт',
+            category: 'Шоу',
             city: 'Москва',
         },
         {
             id: '3',
             title: 'Кленовый сироп',
             category: 'Концерт',
-            city: 'Москва',
+            city: 'Тверь',
         }
     ]
 
-    getEvents(): Events {
+    getEvents(queries: {city?: string; category?: string; page: number; limit: number}): Events {
+        let filteredResult: Item[] = this.items;
+
+        if (queries.city) {
+            filteredResult = filteredResult.filter(item => item.city.toLowerCase() === queries.city!.toLowerCase());
+        }
+
+        if (queries.category) {
+            filteredResult = filteredResult.filter(item => item.category.toLowerCase() === queries.category!.toLowerCase());
+        }
+
+        const offset = (queries.page - 1) * queries.limit;
+
+        const paginatedItems = filteredResult.slice(offset, offset + queries.limit);
+
         return {
-            items: this.items,
-            total: this.items.length,
+            items: paginatedItems,
+            total: filteredResult.length,
+            page: queries.page,
+            totalPages: Math.ceil(filteredResult.length / queries.limit),
+            limit: queries.limit,
         }
     }
 }

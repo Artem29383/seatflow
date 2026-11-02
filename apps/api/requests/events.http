@@ -9,3 +9,45 @@ GET {{baseUrl}}/api/v1/events
 
 ### Несуществующий маршрут
 GET {{baseUrl}}/api/v1/unknown
+
+
+@baseUrl = http://localhost:3000
+
+### Все мероприятия
+GET {{baseUrl}}/api/v1/events
+
+### Фильтр по городу
+GET {{baseUrl}}/api/v1/events?city=Москва
+
+### Проверка регистра
+GET {{baseUrl}}/api/v1/events?city=москва
+
+### Два фильтра одновременно
+GET {{baseUrl}}/api/v1/events?city=Москва&category=Концерт
+
+### Нет совпадений
+GET {{baseUrl}}/api/v1/events?city=Казань
+
+
+@baseUrl = http://localhost:3000
+
+### Первая страница, по два мероприятия
+GET {{baseUrl}}/api/v1/events?page=1&limit=2
+
+### Вторая страница
+GET {{baseUrl}}/api/v1/events?page=2&limit=2
+
+### Пагинация с фильтрацией
+GET {{baseUrl}}/api/v1/events?city=Москва&page=2&limit=1
+
+### Некорректная страница
+GET {{baseUrl}}/api/v1/events?page=0
+
+### Некорректный лимит
+GET {{baseUrl}}/api/v1/events?limit=abc
+
+### Лимит больше максимума
+GET {{baseUrl}}/api/v1/events?limit=51
+
+### Посторонний параметр
+GET {{baseUrl}}/api/v1/events?admin=true
