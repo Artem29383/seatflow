@@ -71,7 +71,7 @@ const server = http.createServer((req, res) => {
                 })
 
                 req.on('end', () => {
-                    if (tooLarge) return;
+                    if (res.writableEnded || res.destroyed || tooLarge) return;
 
                     const body = Buffer.concat(chunks).toString('utf-8');
 

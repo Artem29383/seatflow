@@ -29,3 +29,10 @@ POST http://localhost:3001/echo
 Content-Type: application/json
 
 < ./exact-limit.json
+
+
+### Проверка CPU-сервера — 200
+GET http://localhost:3002/health
+
+### Тяжёлые вычисления — примерно 4 секунды
+GET http://localhost:3002/compute
