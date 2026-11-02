@@ -1,0 +1,11 @@
+
+@baseUrl = http://localhost:3000
+
+### Health
+GET {{baseUrl}}/api/v1/health
+
+### Каталог мероприятий
+GET {{baseUrl}}/api/v1/events
+
+### Несуществующий маршрут
+GET {{baseUrl}}/api/v1/unknown
