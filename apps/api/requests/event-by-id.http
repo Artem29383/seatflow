@@ -1,0 +1,17 @@
+
+@baseUrl = http://localhost:3000
+
+### Существующее мероприятие
+GET {{baseUrl}}/api/v1/events/1
+
+### Другое существующее мероприятие
+GET {{baseUrl}}/api/v1/events/2
+
+### Несуществующее мероприятие
+GET {{baseUrl}}/api/v1/events/999
+
+### Несуществующий строковый ID
+GET {{baseUrl}}/api/v1/events/unknown
+
+### Каталог по-прежнему работает
+GET {{baseUrl}}/api/v1/events?page=1&limit=2

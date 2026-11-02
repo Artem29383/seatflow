@@ -2,6 +2,7 @@ import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module.js';
 import {ValidationPipe} from "@nestjs/common";
 import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
+import {HttpExceptionFilter} from "./common/filters/http-exception.filter.js";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -17,6 +18,8 @@ async function bootstrap() {
         forbidNonWhitelisted: true,
       }),
   );
+
+  app.useGlobalFilters(new HttpExceptionFilter());
 
     // 1. Общая информация о нашем API
     const config = new DocumentBuilder()

@@ -5,7 +5,7 @@ export class EventResponseDto {
         description: 'Уникальный идентификатор мероприятия',
         example: '1',
     })
-    id: string;
+    id: number;
 
     @ApiProperty({
         description: 'Название мероприятия',

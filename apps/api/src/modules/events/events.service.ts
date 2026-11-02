@@ -1,6 +1,6 @@
-import {BadRequestException, Injectable} from '@nestjs/common';
+import {Injectable, NotFoundException} from '@nestjs/common';
 
-interface Item {
+export interface Item {
     id: string;
     title: string;
     category: string;
@@ -17,8 +17,6 @@ export interface Events {
 
 @Injectable()
 export class EventsService {
-    maxLimit = 50;
-
     private readonly items: Item[] = [
         {
             id: '1',
@@ -39,6 +37,16 @@ export class EventsService {
             city: 'Тверь',
         }
     ]
+
+    getEvent(id: string): Item {
+        const event = this.items.find(item => item.id === id);
+
+        if (!event) {
+            throw new NotFoundException('Мероприятие не найдено');
+        }
+
+        return event;
+    }
 
     getEvents(queries: {city?: string; category?: string; page: number; limit: number}): Events {
         let filteredResult: Item[] = this.items;
